@@ -31,6 +31,14 @@ function getTodos($pdo){
   return $todos;
 }
 
+function addTodo($pdo){
+
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  addTodo($pdo);
+}
+
 $todos = getTodos($pdo);
 ?>
 
@@ -43,6 +51,11 @@ $todos = getTodos($pdo);
 </head>
 <body>
   <h1>Todos</h1>
+
+  <form action="" method='post'>
+    <input type="text" name='title' placeholder='Type new todo.'>
+    <!-- <button>Add</button> -->
+  </form>
 
   <ul>
     <?php foreach($todos as $todo):?>
