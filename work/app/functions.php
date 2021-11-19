@@ -50,7 +50,7 @@ function h($str){
  }
 
  function toggleTodo($pdo){
-   $id = $filter_input(INPUT_POST,'id');
+   $id = filter_input(INPUT_POST,'id');
    if(empty($id)){
     return;
    }
