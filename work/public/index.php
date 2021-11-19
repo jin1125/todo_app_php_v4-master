@@ -32,6 +32,14 @@ function getTodos($pdo){
 }
 
 function addTodo($pdo){
+  $title = trim(filter_input(INPUT_POST,'title'));
+  if($title === ''){
+    return;
+  }
+
+  $stmt = $pdo->prepare("INSERT INTO todos (title) VALUES (:title)");
+  $stmt -> bindValue('title',$title,PDO::PARAM_STR);
+  $stmt -> execute();
 
 }
 
