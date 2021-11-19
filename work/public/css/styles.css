@@ -28,6 +28,7 @@ ul{
 
 li{
   display:flex;
+  margin-bottom:8px;
 }
 
 .done{
@@ -35,7 +36,16 @@ li{
   color:#ccc;
 }
 
+input[type='checkbox']{
+  margin-right:8px;
+}
+
 .delete{
   color:#ccc;
   cursor:pointer;
+}
+
+.delete-form{
+  margin-left:auto;
+  padding-left:8px;
 }
