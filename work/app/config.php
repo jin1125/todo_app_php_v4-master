@@ -19,7 +19,7 @@ spl_autoload_register(function($class){
   if(file_exists($filename)){
     require($filename);
   }else{
-    echo 'File not found:'.$fileName;
+    echo 'File not found:' . $fileName;
     exit;
   }
 });
