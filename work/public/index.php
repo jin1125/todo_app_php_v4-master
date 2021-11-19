@@ -10,7 +10,7 @@ try{
     DB_USER,
     DB_PASS,
     [
-      PDO::ATTR_ERRMODE => PDO::ATTR_ERRMODE_EXCEPTION,
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       ]
     );
 
