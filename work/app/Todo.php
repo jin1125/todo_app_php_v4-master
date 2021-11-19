@@ -25,6 +25,9 @@ class Todo{
         case 'delete':
           $this->delete();
         break;
+        case 'purge':
+          $this->purge();
+        break;
         default:
         exit;
       }
@@ -66,6 +69,10 @@ class Todo{
     $stmt = $this->pdo->prepare("DELETE FROM todos WHERE id = :id");
     $stmt -> bindValue('id',$id,\PDO::PARAM_INT);
     $stmt -> execute();
+  }
+
+  private function purge(){
+    $this->pdo->query("DELETE FROM todos WHERE is_done=1");
   }
 
 

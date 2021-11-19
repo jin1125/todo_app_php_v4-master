@@ -29,6 +29,7 @@ $todos = $todo->getAll();
         <span class='purge'>Purge</span>
         <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']) ?>">
       </form>
+    
     </header>
 
     <form action="?action=add" method='post'>
