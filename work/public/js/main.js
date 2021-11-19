@@ -6,4 +6,11 @@
       checkbox.parentNode.submit();
     })
   })
+
+  const deletes = document.querySelectorAll('.delete');
+  deletes.forEach((span)=>{
+    span.addEventListener('click',()=>{
+    span.parentNode.submit();
+    })
+  })
 }
