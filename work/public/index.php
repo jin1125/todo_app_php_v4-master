@@ -7,6 +7,7 @@ define('DB_USER','myappuser');
 define('DB_PASS','myapppass');
 define('SITE_URL','http://'.$_SERVER['HTTP_HOST']);
 
+createToken();
 
 try{
   $pdo = new PDO(
@@ -41,12 +42,6 @@ function validateToken(){
   }
 }
 
-function getTodos($pdo){
-  $stmt = $pdo->query("SELECT * FROM todos ORDER BY id DESC");
-  $todos = $stmt->fetchAll();
-  return $todos;
-}
-
 function addTodo($pdo){
   $title = trim(filter_input(INPUT_POST,'title'));
   if($title === ''){
@@ -59,7 +54,14 @@ function addTodo($pdo){
 
 }
 
+function getTodos($pdo){
+  $stmt = $pdo->query("SELECT * FROM todos ORDER BY id DESC");
+  $todos = $stmt->fetchAll();
+  return $todos;
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  validateToken();
   addTodo($pdo);
 
   header('Location: '.SITE_URL);
@@ -81,6 +83,7 @@ $todos = getTodos($pdo);
 
   <form action="" method='post'>
     <input type="text" name='title' placeholder='Type new todo.'>
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']) ?>">
     <!-- <button>Add</button> -->
   </form>
 
