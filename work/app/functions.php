@@ -34,8 +34,4 @@
    $stmt -> execute();
  }
  
- function getTodos($pdo){
-   $stmt = $pdo->query("SELECT * FROM todos ORDER BY id DESC");
-   $todos = $stmt->fetchAll();
-   return $todos;
- }
+ 
