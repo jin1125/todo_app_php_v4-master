@@ -10,7 +10,10 @@
   const deletes = document.querySelectorAll('.delete');
   deletes.forEach((span)=>{
     span.addEventListener('click',()=>{
-    span.parentNode.submit();
+      if(!confirm('Are you sure?')){
+        return;
+      }
+      span.parentNode.submit();
     })
   })
 }
