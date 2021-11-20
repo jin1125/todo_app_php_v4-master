@@ -3,29 +3,39 @@
 {
   const token = document.querySelector("main").dataset.token;
   const input = document.querySelector('[name="title"]');
+  const ul = document.querySelector("ul");
 
   input.focus();
 
-  function addTodo(id,titleValue){
-    const li = document.createElement('li');
+  ul.addEventListener("click", (e) => {
+    if(e.target.type === 'checkbox'){
+
+    }
+
+    if(e.target.classList.contains('delete')){
+
+    }
+  });
+
+  function addTodo(id, titleValue) {
+    const li = document.createElement("li");
     li.dataset.id = id;
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
 
-    const title = document.createElement('span');
+    const title = document.createElement("span");
     title.textContent = titleValue;
 
-    const deleteSpan = document.createElement('span');
-    deleteSpan.textContent = 'x';
-    deleteSpan.classList.add('delete');
+    const deleteSpan = document.createElement("span");
+    deleteSpan.textContent = "x";
+    deleteSpan.classList.add("delete");
 
     li.appendChild(checkbox);
     li.appendChild(title);
     li.appendChild(deleteSpan);
-    
-    const ul = document.querySelector('ul');
-    ul.insertBefore(li,ul.firstChild);
+
+    ul.insertBefore(li, ul.firstChild);
   }
 
   document.querySelector("form").addEventListener("submit", (e) => {
@@ -40,16 +50,13 @@
         token: token,
       }),
     })
-    .then(response=>
-      response.json()
-    )
-    .then(json=>{
-      addTodo(json.id,title);
-    });
+      .then((response) => response.json())
+      .then((json) => {
+        addTodo(json.id, title);
+      });
 
-    input.value = '';
+    input.value = "";
     input.focus();
-
   });
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -62,7 +69,6 @@
           token: token,
         }),
       });
-
     });
   });
 
