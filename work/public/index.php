@@ -43,7 +43,7 @@ $todos = $todo->getAll();
 
           <span class='delete'>x</span>
 
-         </li>
+        </li>
 
       <?php endforeach;?>
 

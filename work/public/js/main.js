@@ -6,6 +6,14 @@
 
   input.focus();
 
+  function addTodo(id){
+    // <li data-id=''>
+    //   <input type="checkbox" >
+    //   <span></span>
+    //   <span class='delete'>x</span>
+    // </li>
+  }
+
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -20,13 +28,12 @@
       response.json()
     )
     .then(json=>{
-      console.log(json.id);
+      addTodo(json.id);
     });
 
     input.value = '';
     input.focus();
 
-    console.log('finish');
   });
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
