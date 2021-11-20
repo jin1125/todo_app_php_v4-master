@@ -8,17 +8,25 @@
   input.focus();
 
   ul.addEventListener("click", (e) => {
-    if(e.target.type === 'checkbox'){
+    if (e.target.type === "checkbox") {
       fetch("?action=toggle", {
         method: "POST",
         body: new URLSearchParams({
           id: e.target.parentNode.dataset.id,
           token: token,
         }),
-      });
+      }).then((response) => {
+        if(!response.ok){
+          throw new Error('This todo is has been deleted!');
+        }
+      })
+      .catch(err=>{
+        alert(err.message);
+        location.reload();
+      })
     }
 
-    if(e.target.classList.contains('delete')){
+    if (e.target.classList.contains("delete")) {
       if (!confirm("Are you sure?")) {
         return;
       }
@@ -76,7 +84,6 @@
     input.value = "";
     input.focus();
   });
-
 
   const purge = document.querySelector(".purge");
   purge.addEventListener("click", () => {
