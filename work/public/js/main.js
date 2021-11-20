@@ -1,7 +1,19 @@
 "use strict";
 
 {
-  const token = document.querySelector('main').dataset.token;
+  const token = document.querySelector("main").dataset.token;
+
+  document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    fetch("?action=add", {
+      method: "POST",
+      body: new URLSearchParams({
+        title: document.querySelector('[name="title"]').value,
+        token: token,
+      }),
+    });
+  });
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach((checkbox) => {
@@ -22,7 +34,7 @@
       if (!confirm("Are you sure?")) {
         return;
       }
-      
+
       fetch("?action=delete", {
         method: "POST",
         body: new URLSearchParams({
@@ -32,7 +44,6 @@
       });
 
       span.parentNode.remove();
-
     });
   });
 
@@ -41,7 +52,7 @@
     if (!confirm("Are you sure?")) {
       return;
     }
-    
+
     fetch("?action=purge", {
       method: "POST",
       body: new URLSearchParams({
@@ -49,12 +60,11 @@
       }),
     });
 
-    const lis = document.querySelectorAll('li');
-    lis.forEach((li)=>{
-      if(li.children[0].checked){
+    const lis = document.querySelectorAll("li");
+    lis.forEach((li) => {
+      if (li.children[0].checked) {
         li.remove();
       }
-    })
-
+    });
   });
 }

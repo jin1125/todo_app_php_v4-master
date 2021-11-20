@@ -29,10 +29,8 @@ $todos = $todo->getAll();
     
     </header>
 
-    <form action="?action=add" method='post'>
+    <form>
       <input type="text" name='title' placeholder='Type new todo.'>
-      <input type="hidden" name="token" value="<?= Utils::h($_SESSION['token']) ?>">
-      <!-- <button>Add</button> -->
     </form>
 
     <ul>
