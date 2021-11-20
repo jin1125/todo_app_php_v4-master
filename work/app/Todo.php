@@ -50,16 +50,29 @@ class Todo{
     return (int) $this->pdo->lastInsertId();
   }
  
+
   private function toggle(){
     $id = filter_input(INPUT_POST,'id');
     if(empty($id)){
      return;
     }
- 
+
+    $stmt = $this->pdo->prepare("SELECT * FROM todos WHERE id = :id");
+    $stmt -> bindValue('id',$id,\PDO::PARAM_INT);
+    $stmt -> execute();
+    $todo = $stmt->fetch();
+    
+    if(empty($todo)){
+      header('HTTP',true,404);
+      exit;
+    }
+
     $stmt = $this->pdo->prepare("UPDATE todos SET is_done = NOT is_done WHERE id = :id");
     $stmt -> bindValue('id',$id,\PDO::PARAM_INT);
     $stmt -> execute();
+
   }
+
   
   private function delete(){
     $id = filter_input(INPUT_POST,'id');
