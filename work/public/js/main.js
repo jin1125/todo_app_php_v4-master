@@ -6,7 +6,7 @@
 
   input.focus();
 
-  function addTodo(id){
+  function addTodo(id,titleValue){
     const li = document.createElement('li');
     li.dataset.id = id;
 
@@ -14,7 +14,7 @@
     checkbox.type = 'checkbox';
 
     const title = document.createElement('span');
-    title.textContent = input;
+    title.textContent = titleValue;
 
     const deleteSpan = document.createElement('span');
     deleteSpan.textContent = 'x';
@@ -31,10 +31,12 @@
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
 
+    const title = input.value;
+
     fetch("?action=add", {
       method: "POST",
       body: new URLSearchParams({
-        title: input.value,
+        title: title,
         token: token,
       }),
     })
@@ -42,7 +44,7 @@
       response.json()
     )
     .then(json=>{
-      addTodo(json.id);
+      addTodo(json.id,title);
     });
 
     input.value = '';
