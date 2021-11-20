@@ -42,6 +42,7 @@ $todos = $todo->getAll();
     <ul>
       <?php foreach($todos as $todo):?>
         <li>
+
           <input
             type="checkbox" 
             data-id='<?= Utils::h($todo->id) ?>'
@@ -50,17 +51,18 @@ $todos = $todo->getAll();
 
           <span><?= Utils::h($todo->title); ?></span>
 
-        
-        <span
-         data-id="<?= Utils::h($todo->id); ?>"
-         data-token="<?= Utils::h($_SESSION['token']); ?>"
-         class='delete'
-         >
-         x
-        </span>
+          <span
+            data-id="<?= Utils::h($todo->id); ?>"
+            data-token="<?= Utils::h($_SESSION['token']); ?>"
+            class='delete'
+            >
+            x
+          </span>
 
-      </li>
+         </li>
+
       <?php endforeach;?>
+
     </ul>
     </main>
   <script src='js/main.js'></script>
