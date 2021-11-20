@@ -9,11 +9,29 @@
 
   ul.addEventListener("click", (e) => {
     if(e.target.type === 'checkbox'){
-
+      fetch("?action=toggle", {
+        method: "POST",
+        body: new URLSearchParams({
+          id: e.target.parentNode.dataset.id,
+          token: token,
+        }),
+      });
     }
 
     if(e.target.classList.contains('delete')){
+      if (!confirm("Are you sure?")) {
+        return;
+      }
 
+      fetch("?action=delete", {
+        method: "POST",
+        body: new URLSearchParams({
+          id: e.target.parentNode.dataset.id,
+          token: token,
+        }),
+      });
+
+      e.target.parentNode.remove();
     }
   });
 
@@ -59,37 +77,6 @@
     input.focus();
   });
 
-  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", () => {
-      fetch("?action=toggle", {
-        method: "POST",
-        body: new URLSearchParams({
-          id: checkbox.parentNode.dataset.id,
-          token: token,
-        }),
-      });
-    });
-  });
-
-  const deletes = document.querySelectorAll(".delete");
-  deletes.forEach((span) => {
-    span.addEventListener("click", () => {
-      if (!confirm("Are you sure?")) {
-        return;
-      }
-
-      fetch("?action=delete", {
-        method: "POST",
-        body: new URLSearchParams({
-          id: span.parentNode.dataset.id,
-          token: token,
-        }),
-      });
-
-      span.parentNode.remove();
-    });
-  });
 
   const purge = document.querySelector(".purge");
   purge.addEventListener("click", () => {
