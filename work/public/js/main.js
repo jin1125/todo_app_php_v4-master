@@ -38,6 +38,15 @@
     if (!confirm("Are you sure?")) {
       return;
     }
-    purge.parentNode.submit();
+    
+    fetch("?action=purge", {
+      method: "POST",
+      body: new URLSearchParams({
+        token: purge.dataset.token,
+      }),
+    });
+
+    
+
   });
 }
