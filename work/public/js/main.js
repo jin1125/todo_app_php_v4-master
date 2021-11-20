@@ -12,6 +12,19 @@
     //   <span></span>
     //   <span class='delete'>x</span>
     // </li>
+
+    const li = document.createElement('li');
+    li.dataset.id = id;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const title = document.createElement('span');
+    title.textContent = input;
+
+    const deleteSpan = document.createElement('span');
+    deleteSpan.textContent = 'x';
+    deleteSpan.classList.add('delete');
   }
 
   document.querySelector("form").addEventListener("submit", (e) => {
